@@ -19,8 +19,25 @@ form.addEventListener("submit", (e) => {
 
 function addHabitToDOM(habit) {
     const li = document.createElement("li");
-    li.textContent = habit;
-    li.addEventListener("click", () => li.classList.toggle("done"));
+
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.id = `habit-${habitList.children.length + 1}`;
+
+    checkbox.addEventListener("change", () => {
+        if (checkbox.checked) {
+            li.classList.add("done");
+        } else {
+            li.classList.remove("done");
+        }
+    });
+
+    const label = document.createElement("label");
+    label.htmlFor = checkbox.id;
+    label.textContent = habit;
+
+    li.appendChild(checkbox);
+    li.appendChild(label);
     habitList.appendChild(li);
 }
 
